@@ -7,11 +7,13 @@ import {
   createSounds,
   withSounds,
   Arwes,
-  Row,
-  Col,
-  Words,
 } from "arwes";
 import "./index.css";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import Game from "./components/MainMenu/Game/Game";
+import MainMenu from "./components/MainMenu/MainMenu";
 
 import backgroundImage from "./assets/graphics/background-large.jpg";
 import backgroundMusic from "./assets/sounds/background_music_solace.mp3";
@@ -39,19 +41,16 @@ function App() {
       <SoundsProvider sounds={createSounds(mySounds)}>
         <Player />
         <Arwes background={backgroundImage}>
-          <Row>
-            <Col
-              s={12}
-              m={8}
-              l={6}
-              offset={["m2", "l3"]}
-              className="centerContent"
-            >
-              <h1>
-                <Words animate>Stardust</Words>
-              </h1>
-            </Col>
-          </Row>
+          <Router>
+            <Switch>
+              <Route path="/game">
+                <Game />
+              </Route>
+              <Route path="/">
+                <MainMenu />
+              </Route>
+            </Switch>
+          </Router>
         </Arwes>
       </SoundsProvider>
     </ThemeProvider>

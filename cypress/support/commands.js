@@ -25,3 +25,5 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 /// <reference types="Cypress" />
+
+import "@testing-library/cypress/add-commands";

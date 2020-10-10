@@ -17,4 +17,9 @@ describe("The Main Menu", () => {
     cy.wait(3000);
     expectBackgroundMusicPlaying();
   });
+
+  it("should contain a button that allows me to start a new game", () => {
+    cy.findByRole("button", { name: /Neues Spiel starten/i }).click();
+    cy.url().should("include", "/game");
+  });
 });
