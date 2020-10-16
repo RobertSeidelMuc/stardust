@@ -1,20 +1,9 @@
 import React, { useState } from "react";
 import { Button, Row, Col, Words, Frame } from "arwes";
-import { withStyles } from "arwes";
 
 import { Link } from "react-router-dom";
 
-const styles = () => ({
-  button: {
-    "&:hover": {
-      borderStyle: "solid",
-      borderColor: "white",
-      borderWidth: "1px",
-    },
-  },
-});
-
-const ButtonFrame = withStyles(styles)(({ children }) => {
+const ButtonFrame = ({ children }) => {
   const [mouseOver, setMouseOver] = useState(false);
   return (
     <Frame
@@ -27,7 +16,7 @@ const ButtonFrame = withStyles(styles)(({ children }) => {
       {children}
     </Frame>
   );
-});
+};
 
 export default function MainMenu() {
   return (
