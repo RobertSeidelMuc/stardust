@@ -7,12 +7,13 @@ import {
   createSounds,
   withSounds,
   Arwes,
+  Frame,
 } from "arwes";
 import "./index.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Game from "./components/MainMenu/Game/Game";
+import Game from "./components/Game/Game";
 import MainMenu from "./components/MainMenu/MainMenu";
 
 import backgroundImage from "./assets/graphics/background-large.jpg";
@@ -41,6 +42,7 @@ function App() {
       <SoundsProvider sounds={createSounds(mySounds)}>
         <Player />
         <Arwes background={backgroundImage}>
+          <Frame hover></Frame>
           <Router>
             <Switch>
               <Route path="/game">
