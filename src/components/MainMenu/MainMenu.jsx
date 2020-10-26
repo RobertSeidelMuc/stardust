@@ -25,11 +25,23 @@ export default function MainMenu() {
         <h1>
           <Words animate>Stardust</Words>
         </h1>
-        <Link to="/game">
-          <Button Frame={ButtonFrame} animate>
-            Neues Spiel starten
-          </Button>
-        </Link>
+        <div>
+          <Link to="/game">
+            <Button Frame={ButtonFrame} animate className="button">
+              Neues Spiel starten
+            </Button>
+          </Link>
+          <Link to="/load">
+            <Button Frame={ButtonFrame} animate className="button">
+              Spiel laden
+            </Button>
+          </Link>
+          <Link to="/credits">
+            <Button Frame={ButtonFrame} animate className="button">
+              Credits
+            </Button>
+          </Link>
+        </div>
       </Col>
     </Row>
   );

@@ -7,7 +7,6 @@ import {
   createSounds,
   withSounds,
   Arwes,
-  Frame,
 } from "arwes";
 import "./index.css";
 
@@ -42,7 +41,6 @@ function App() {
       <SoundsProvider sounds={createSounds(mySounds)}>
         <Player />
         <Arwes background={backgroundImage}>
-          <Frame hover></Frame>
           <Router>
             <Switch>
               <Route path="/game">
