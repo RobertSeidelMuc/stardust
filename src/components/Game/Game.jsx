@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Col, Frame, Row } from "arwes";
+import { Col, Frame, Puffs, Row } from "arwes";
 
 export default function Game() {
   const ref = useRef(null);
@@ -7,7 +7,7 @@ export default function Game() {
   const [gridWidth, setGridWidth] = useState("0");
   const [gridHeight, setGridHeight] = useState("0");
   const [starDiameter, setStarDiameter] = useState("0");
-  const planetSizeFactor = 13;
+  const starSizeFactor = 14;
   const grid = { columns: 8, rows: 4 };
 
   useEffect(() => {
@@ -22,8 +22,9 @@ export default function Game() {
     if (ref.current) {
       const newScreenWidth = ref.current.clientWidth;
       const newScreenHeight = (ref.current.clientWidth / 5) * 3;
+      const newStarDiameter = newScreenHeight / starSizeFactor;
       setScreenHeight(newScreenHeight);
-      setStarDiameter(newScreenHeight / planetSizeFactor);
+      setStarDiameter(newStarDiameter);
       setGridHeight(newScreenHeight / grid.rows);
       setGridWidth(newScreenWidth / grid.columns);
     }
@@ -42,8 +43,8 @@ export default function Game() {
               width: starDiameter,
               height: starDiameter,
               position: "absolute",
-              top: `${gridHeight / 2 + gridHeight * r}px`,
-              left: `${gridWidth / 2 + gridWidth * c}px`,
+              top: `${gridHeight / 2 + gridHeight * r - starDiameter / 2}px`,
+              left: `${gridWidth / 2 + gridWidth * c - starDiameter / 2}px`,
             }}
           ></span>
         );
@@ -56,13 +57,15 @@ export default function Game() {
     <>
       <Row>
         <Col s={9} offset={["s2"]} id="centercolumn">
-          <Frame className="mainscreen" noBackground>
-            <div
-              ref={ref}
-              style={{ width: "100%", height: `${screenHeight}px` }}
-            >
-              {createStars()}
-            </div>
+          <Frame className="mainscreen" noBackground animate>
+            <Puffs>
+              <div
+                ref={ref}
+                style={{ width: "100%", height: `${screenHeight}px` }}
+              >
+                {createStars()}
+              </div>
+            </Puffs>
           </Frame>
         </Col>
       </Row>
