@@ -40,4 +40,26 @@ h1 {
 .star {
   display: inline;
   border-radius: 50%;
+  z-index: 9;
+  transition: ease 500ms;
+}
+
+.star:hover {
+  scale: 1.1;
+  transition: ease 500ms;
+}
+
+.starOverlay {
+  position: absolute;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(2, 157, 187, 0.3);
+  transition: ease 500ms;
+}
+
+.starOverlay:hover {
+  background-color: rgba(2, 157, 187, 0);
+  transition: ease 500ms;
 }
