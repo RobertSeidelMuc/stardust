@@ -38,9 +38,7 @@ h1 {
 }
 
 .star {
-  display: inline;
   border-radius: 50%;
-  z-index: 9;
   transition: ease 500ms;
 }
 

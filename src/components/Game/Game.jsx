@@ -1,21 +1,30 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Col, Frame, Puffs, Row } from "arwes";
+import { Col, Frame, Puffs, Row, Words } from "arwes";
 
 import Star from "./Star/Star";
 
 export default function Game() {
   const ref = useRef(null);
   const [screenHeight, setScreenHeight] = useState(0);
+  const [screenWidth, setScreenWidth] = useState(0);
   const [gridWidth, setGridWidth] = useState(0);
   const [gridHeight, setGridHeight] = useState(0);
   const [stars, setStars] = useState([]);
   const grid = { columns: 8, rows: 4 };
+  const [showTooltip, setShowTooltip] = useState({
+    show: false,
+    starData: {},
+    diameter: 0,
+    positionLeft: 0,
+    positionTop: 0,
+  });
 
   useEffect(() => {
     function handleResize() {
       if (ref.current) {
         const newScreenWidth = ref.current.clientWidth;
         const newScreenHeight = (ref.current.clientWidth / 5) * 3;
+        setScreenWidth(newScreenWidth);
         setScreenHeight(newScreenHeight);
         setGridHeight(newScreenHeight / grid.rows);
         setGridWidth(newScreenWidth / grid.columns);
@@ -124,6 +133,8 @@ export default function Game() {
         screenHeight={screenHeight}
         gridWidth={gridWidth}
         gridHeight={gridHeight}
+        showTooltip={showTooltip}
+        setShowTooltip={setShowTooltip}
       />
     ));
 
@@ -138,9 +149,52 @@ export default function Game() {
             <Puffs>
               <div
                 ref={ref}
-                style={{ width: "100%", height: `${screenHeight}px` }}
+                style={{
+                  width: "100%",
+                  height: `${screenHeight}px`,
+                }}
               >
                 {renderStars()}
+                {showTooltip.show === true && (
+                  <Frame
+                    animate
+                    corners={1}
+                    level={0}
+                    style={{
+                      position: "absolute",
+                      left:
+                        showTooltip.starData.column + 1 <= grid.columns / 2 &&
+                        `${
+                          showTooltip.positionLeft + showTooltip.diameter * 1.5
+                        }px`,
+                      right:
+                        showTooltip.starData.column + 1 > grid.columns / 2 &&
+                        `${
+                          screenWidth -
+                          showTooltip.positionLeft +
+                          showTooltip.diameter * 0.5
+                        }px`,
+                      top:
+                        showTooltip.starData.row + 1 <= grid.rows / 2 &&
+                        `${showTooltip.positionTop}px`,
+                      bottom:
+                        showTooltip.starData.row + 1 > grid.rows / 2 &&
+                        `${
+                          screenHeight -
+                          showTooltip.positionTop -
+                          showTooltip.diameter * 0.5
+                        }px`,
+                      zIndex: 100,
+                    }}
+                  >
+                    <Words
+                      animate
+                      style={{ whiteSpace: "nowrap", margin: "0.5em" }}
+                    >
+                      {showTooltip.starData.name}
+                    </Words>
+                  </Frame>
+                )}
               </div>
             </Puffs>
           </Frame>
