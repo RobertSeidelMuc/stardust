@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Col, Frame, Puffs, Row, Words } from "arwes";
+import { Col, Frame, Heading, Paragraph, Puffs, Row } from "arwes";
 
 import Star from "./Star/Star";
 
@@ -72,6 +72,12 @@ export default function Game() {
     for (let r = 0; r < grid.rows; r++) {
       for (let c = 0; c < grid.columns; c++) {
         const newType = starTypes[randomize(0, starTypes.length)];
+        const newPlanetNumber = randomize(1, 4);
+        const newPlanets = [];
+        for (let i = 0; i < newPlanetNumber; i++) {
+          newPlanets.push({ name: planetNames[0] });
+          planetNames.shift();
+        }
 
         const newStar = {
           row: r,
@@ -80,6 +86,7 @@ export default function Game() {
           y: randomize(0, 100),
           type: newType,
           name: starNames[index],
+          planets: newPlanets,
         };
         newStars.push(newStar);
         index++;
@@ -125,6 +132,7 @@ export default function Game() {
                     corners={1}
                     level={0}
                     style={{
+                      minWidth: "10rem",
                       position: "absolute",
                       left:
                         showTooltip.starData.column + 1 <= grid.columns / 2 &&
@@ -151,12 +159,30 @@ export default function Game() {
                       zIndex: 100,
                     }}
                   >
-                    <Words
+                    <Heading
+                      node="h5"
                       animate
                       style={{ whiteSpace: "nowrap", margin: "0.5em" }}
                     >
                       {showTooltip.starData.name}
-                    </Words>
+                    </Heading>
+                    <Paragraph
+                      animate
+                      style={{ margin: "0 0.5em 0.5em 0.5em" }}
+                    >
+                      <span style={{ fontWeight: 600 }}>
+                        {showTooltip.starData.planets.length > 1
+                          ? "Planeten:"
+                          : "Planet:"}
+                      </span>
+                      <br />
+                      {showTooltip.starData.planets.map((planet) => (
+                        <>
+                          <span>{planet.name}</span>
+                          <br />
+                        </>
+                      ))}
+                    </Paragraph>
                   </Frame>
                 )}
               </div>
