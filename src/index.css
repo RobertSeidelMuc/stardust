@@ -3,31 +3,23 @@
   src: local("Ultra"), url(./assets/fonts/Ultra.otf) format("opentype");
 }
 
-.button {
-  margin: 0.25em;
-  width: 100%;
-  text-align: center;
-}
-
-#centercolumn {
-  display: flex;
-  align-items: center;
-  min-height: 97vh;
-}
-
-.centerContent {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 h1 {
   font-family: Ultra;
   font-size: 8rem;
   font-weight: 400;
   text-align: center;
   margin-left: 0.75em;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 1em;
+}
+
+.button {
+  margin: 0.25em;
+  width: 100%;
+  text-align: center;
 }
 
 .mainscreen {
@@ -37,9 +29,16 @@ h1 {
   width: 100%;
 }
 
+.centerContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .star {
   border-radius: 50%;
-  transition: ease 500ms;
+  transition: scale ease 500ms;
 }
 
 .star:hover {
@@ -60,4 +59,10 @@ h1 {
 .starOverlay:hover {
   background-color: rgba(2, 157, 187, 0);
   transition: ease 500ms;
+}
+
+#centercolumn {
+  display: flex;
+  align-items: center;
+  min-height: 97vh;
 }
