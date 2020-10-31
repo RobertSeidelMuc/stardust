@@ -3,6 +3,9 @@ import { Col, Frame, Puffs, Row, Words } from "arwes";
 
 import Star from "./Star/Star";
 
+import { planetNames } from "../../textdata/planetNames";
+import { starNames } from "../../textdata/starNames";
+
 export default function Game() {
   const ref = useRef(null);
   const [screenHeight, setScreenHeight] = useState(0);
@@ -52,46 +55,6 @@ export default function Game() {
       { category: "yellow", highlight: "#cdd47b", shadow: "#fa0" },
     ];
 
-    const starNames = [
-      "Aldebaran",
-      "Alpha Hydri",
-      "Altair",
-      "Beta Pictoris",
-      "Canis Minoris",
-      "Canum Venaticorum",
-      "Comae Berenices",
-      "Chi Herculis",
-      "Cygni",
-      "Delta Equulei",
-      "Denebola",
-      "Epsilon Serpentis",
-      "Eta Scorpii",
-      "Fomalhaut",
-      "Gamma Tucanae",
-      "Iota Virginis",
-      "Kappe Doradus",
-      "Lambda Arae",
-      "Leonis Minoris",
-      "Mu Cassiopeiae",
-      "Nu Octantis",
-      "Omicron Aquilae",
-      "Ophiuchi",
-      "Pi Mensae",
-      "Pollux",
-      "Procyon",
-      "Psi Capricorni",
-      "Rho Puppis",
-      "Sigma Ursae",
-      "Sirius",
-      "Tau Cygni",
-      "Theta Sculptoris",
-      "Upsilon Aquarii",
-      "Ursae Majoris",
-      "Vega",
-      "Xi Pegasi",
-      "Zeta Leporis",
-    ];
-
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -100,6 +63,7 @@ export default function Game() {
     }
 
     shuffleArray(starNames);
+    shuffleArray(planetNames);
 
     const newStars = [];
 
