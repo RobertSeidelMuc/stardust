@@ -1,4 +1,5 @@
-#Stardust
+# Stardust
+A sci-fi themed game in progress, inspired by the German C64 game "Sterne wie Staub"
 
 ## Stack
 
@@ -13,5 +14,3 @@ Solace by Scott Buckley | https://soundcloud.com/scottbuckley<br />
 Music promoted by https://www.free-stock-music.com<br />
 Attribution 4.0 International (CC BY 4.0)<br />
 https://creativecommons.org/licenses/by/4.0/
-
-
