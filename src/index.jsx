@@ -18,6 +18,14 @@ import MainMenu from "./components/MainMenu/MainMenu";
 import backgroundImage from "./assets/graphics/background-large.jpg";
 import backgroundMusic from "./assets/sounds/background_music_solace.mp3";
 
+const myTheme = {
+  typography: {
+    fontFamily: '"Titillium Web", Sans-Serif',
+    headerFontFamily: '"Electrolize", Sans-Serif',
+    fontSize: "12pt",
+  },
+};
+
 const mySounds = {
   players: {
     background: {
@@ -37,7 +45,7 @@ const Player = withSounds()((props) => {
 
 function App() {
   return (
-    <ThemeProvider theme={createTheme()}>
+    <ThemeProvider theme={createTheme(myTheme)}>
       <SoundsProvider sounds={createSounds(mySounds)}>
         <Player />
         <Arwes background={backgroundImage}>
