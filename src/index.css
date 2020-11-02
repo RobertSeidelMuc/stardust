@@ -38,11 +38,11 @@ ul {
 
 .star {
   border-radius: 50%;
-  transition: scale ease 500ms;
+  transition: ease 500ms;
 }
 
 .star:hover {
-  scale: 1.1;
+  transform: scale(1.1);
   transition: ease 500ms;
 }
 
