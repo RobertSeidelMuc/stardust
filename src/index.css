@@ -36,6 +36,11 @@ ul {
   flex-direction: column;
 }
 
+.planet {
+  border-radius: 50%;
+  background-color: blue;
+}
+
 .star {
   border-radius: 50%;
   transition: ease 500ms;
