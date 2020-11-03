@@ -1,25 +1,36 @@
 import React from "react";
+import { calculateStarPosition } from "./starHelperFunctions";
+import IStarComponent from "./IStarComponent";
 
-export default function Star(props) {
-  const starSizeFactor = 16;
-  const diameter = props.screenHeight / starSizeFactor;
-  const glowRadius = diameter / 3;
-  const positionLeft =
-    props.gridWidth * 0.05 +
-    ((props.gridWidth * 0.9 - diameter) / 100) * props.starData.x +
-    props.gridWidth * props.starData.column;
+export default function Star(props: IStarComponent) {
+  const {
+    screenHeight,
+    gridHeight,
+    gridWidth,
+    starData,
+    showTooltip,
+    setShowTooltip,
+  } = props;
+  const diameter = screenHeight / starData.sizeFactor;
+  const glowRadius = diameter / 5;
+  const positionLeft = calculateStarPosition(
+    gridWidth,
+    diameter,
+    starData.x,
+    starData.column
+  );
   const positionTop =
-    props.gridHeight * 0.05 +
-    ((props.gridHeight * 0.9 - diameter) / 100) * props.starData.y +
-    props.gridHeight * props.starData.row;
+    gridHeight * 0.05 +
+    ((gridHeight * 0.9 - diameter) / 100) * starData.y +
+    gridHeight * starData.row;
 
   return (
     <>
       <div
         className="star"
         onMouseOver={() => {
-          if (!props.showTooltip.show) {
-            props.setShowTooltip({
+          if (!showTooltip.show) {
+            setShowTooltip({
               show: true,
               diameter: diameter,
               starData: props.starData,
@@ -29,8 +40,8 @@ export default function Star(props) {
           }
         }}
         onMouseLeave={() => {
-          if (props.showTooltip.show) {
-            props.setShowTooltip({
+          if (showTooltip.show) {
+            setShowTooltip({
               show: false,
               diameter: 0,
               starData: {},
@@ -45,25 +56,21 @@ export default function Star(props) {
             glowRadius / 2
           }px #fff, /* inner white */ inset ${-glowRadius / 2}px 0 ${
             glowRadius * 2
-          }px ${
-            props.starData.type.highlight
-          }, /* inner right cyan short */ inset ${glowRadius / 2}px 0 ${
-            glowRadius * 16
-          }px ${
-            props.starData.type.shadow
+          }px ${starData.type.highlight}, /* inner right cyan short */ inset ${
+            glowRadius / 2
+          }px 0 ${glowRadius * 16}px ${
+            starData.type.shadow
           }, /* inner left magenta broad */ inset ${-glowRadius / 2}px 0 ${
             glowRadius * 4
-          }px ${
-            props.starData.type.highlight
-          }, /* inner right cyan broad */ 0 0 ${
+          }px ${starData.type.highlight}, /* inner right cyan broad */ 0 0 ${
             glowRadius / 2
           }px #fff, /* outer white */ ${-glowRadius / 8}px 0 ${glowRadius}px ${
-            props.starData.type.shadow
+            starData.type.shadow
           }, /* outer left magenta */ ${glowRadius / 8}px 0 ${glowRadius}px ${
-            props.starData.type.highlight
+            starData.type.highlight
           } /* outer right cyan */`,
-          width: diameter,
-          height: diameter,
+          width: `${diameter}px`,
+          height: `${diameter}px`,
           position: "absolute",
           top: `${positionTop}px`,
           left: `${positionLeft}px`,
