@@ -43,7 +43,7 @@ ul {
 
 .star {
   border-radius: 50%;
-  transition: ease 500ms;
+  transition: transform ease 500ms;
 }
 
 .star:hover {

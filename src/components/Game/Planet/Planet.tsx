@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { calculateStarPosition } from "../Star/starHelperFunctions";
 
 import randomize from "../../../calculations/randomize";
@@ -31,20 +31,44 @@ export default function Planet(props: IPlanet) {
   const radiansStart = starData.planetStartPosition * (Math.PI / 180);
   const radiansStep = degreesStep * (Math.PI / 180);
 
-  const xPosition =
-    orbitRadius * Math.cos(radiansStart + radiansStep * (planetNumber - 1));
-  const yPosition =
-    orbitRadius * Math.sin(radiansStart + radiansStep * (planetNumber - 1));
+  const [increase, setIncrease] = useState(0);
+
+  const x =
+    orbitRadius *
+    Math.cos(radiansStart + radiansStep * (planetNumber - 1) + increase);
+  const y =
+    orbitRadius *
+    Math.sin(radiansStart + radiansStep * (planetNumber - 1) + increase);
+
+  const [xPosition, setXPosition] = useState(x);
+
+  const [yPosition, setYPosition] = useState(y);
+
+  useEffect(() => {
+    const movement = setInterval(() => {
+      setIncrease(increase + 0.02);
+    }, 1000);
+    return () => clearInterval(movement);
+  }, [increase]);
+
+  useEffect(() => {
+    setXPosition(x);
+    setYPosition(y);
+  }, [x, y]);
 
   return (
     <div
+      key={`${starData.name}_${planetNumber}`}
       className="planet"
       style={{
         position: "absolute",
-        width: `${diameter}px`,
-        height: `${diameter}px`,
-        left: `${starCenterX + xPosition}px`,
-        top: `${starCenterY + yPosition}px`,
+        width: `${Math.round(diameter)}px`,
+        height: `${Math.round(diameter)}px`,
+        transition: "transform linear 1.5s",
+        transform: `translateX(${starCenterX + xPosition}px) translateY(${
+          starCenterY + yPosition
+        }px)`,
+        cursor: "pointer",
       }}
     />
   );
