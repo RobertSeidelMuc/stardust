@@ -10,4 +10,5 @@ export default interface IStarData {
   };
   sizeFactor: number;
   planetStartPosition: number;
+  name: string;
 }
