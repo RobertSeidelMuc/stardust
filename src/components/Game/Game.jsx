@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Col, Frame, Heading, Paragraph, Puffs, Row } from "arwes";
+import { Col, Frame, Puffs, Row } from "arwes";
 
 import Star from "./Star/Star";
+import Planet from "./Planet/Planet";
+import Tooltip from "./Tooltip";
 
 import { planetNames } from "../../textdata/planetNames";
 import { starNames } from "../../textdata/starNames";
+
+import randomize from "../../calculations/randomize";
 
 export default function Game() {
   const ref = useRef(null);
@@ -42,11 +46,6 @@ export default function Game() {
   }, [grid.columns, grid.rows]);
 
   useEffect(() => {
-    //returns a random number between min (included) and max (excluded)
-    function randomize(min, max) {
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-
     const starTypes = [
       { category: "blue", highlight: "#0ff", shadow: "#f0f" },
       { category: "green", highlight: "#85ff8d", shadow: "#0fb" },
@@ -72,7 +71,7 @@ export default function Game() {
     for (let r = 0; r < grid.rows; r++) {
       for (let c = 0; c < grid.columns; c++) {
         const newType = starTypes[randomize(0, starTypes.length)];
-        const newPlanetNumber = randomize(1, 4);
+        const newPlanetNumber = randomize(1, 5);
         const newPlanets = [];
         for (let i = 0; i < newPlanetNumber; i++) {
           newPlanets.push({ name: planetNames[0] });
@@ -87,6 +86,8 @@ export default function Game() {
           type: newType,
           name: starNames[index],
           planets: newPlanets,
+          sizeFactor: 16,
+          planetStartPosition: randomize(0, 360),
         };
         newStars.push(newStar);
         index++;
@@ -112,6 +113,22 @@ export default function Game() {
     return starNodes;
   }
 
+  function renderPlanets() {
+    const planetNodes = stars.map((star) =>
+      star.planets.map((planet, index) => (
+        <Planet
+          screenHeight={screenHeight}
+          starData={star}
+          gridWidth={gridWidth}
+          gridHeight={gridHeight}
+          planetNumber={index + 1}
+        />
+      ))
+    );
+
+    return planetNodes;
+  }
+
   return (
     <>
       <Row>
@@ -126,64 +143,14 @@ export default function Game() {
                 }}
               >
                 {renderStars()}
+                {renderPlanets()}
                 {showTooltip.show === true && (
-                  <Frame
-                    animate
-                    corners={1}
-                    level={0}
-                    style={{
-                      minWidth: "10rem",
-                      position: "absolute",
-                      left:
-                        showTooltip.starData.column + 1 <= grid.columns / 2 &&
-                        `${
-                          showTooltip.positionLeft + showTooltip.diameter * 1.5
-                        }px`,
-                      right:
-                        showTooltip.starData.column + 1 > grid.columns / 2 &&
-                        `${
-                          screenWidth -
-                          showTooltip.positionLeft +
-                          showTooltip.diameter * 0.5
-                        }px`,
-                      top:
-                        showTooltip.starData.row + 1 <= grid.rows / 2 &&
-                        `${showTooltip.positionTop}px`,
-                      bottom:
-                        showTooltip.starData.row + 1 > grid.rows / 2 &&
-                        `${
-                          screenHeight -
-                          showTooltip.positionTop -
-                          showTooltip.diameter * 0.5
-                        }px`,
-                      zIndex: 100,
-                    }}
-                  >
-                    <Heading
-                      node="h5"
-                      animate
-                      style={{ whiteSpace: "nowrap", margin: "0.5em" }}
-                    >
-                      {showTooltip.starData.name}
-                    </Heading>
-                    <Paragraph
-                      animate
-                      style={{ margin: "0 0.5em 0.5em 0.5em" }}
-                    >
-                      <span style={{ fontWeight: 600 }}>
-                        {showTooltip.starData.planets.length > 1
-                          ? "Planeten:"
-                          : "Planet:"}
-                      </span>
-                      <br />
-                      {showTooltip.starData.planets.map((planet) => (
-                        <>
-                          <span>{planet.name}</span>
-                          <br />
-                        </>
-                      ))}
-                    </Paragraph>
-                  </Frame>
+                  <Tooltip
+                    showTooltip={showTooltip}
+                    grid={grid}
+                    screenWidth={screenWidth}
+                    screenHeight={screenHeight}
+                  />
                 )}
               </div>
             </Puffs>
