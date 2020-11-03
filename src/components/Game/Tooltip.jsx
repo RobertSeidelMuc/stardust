@@ -30,14 +30,10 @@ export default function Tooltip(props) {
         zIndex: 100,
       }}
     >
-      <Heading
-        node="h5"
-        animate
-        style={{ whiteSpace: "nowrap", margin: "0.5em" }}
-      >
+      <Heading node="h5" style={{ whiteSpace: "nowrap", margin: "0.5em" }}>
         {showTooltip.starData.name}
       </Heading>
-      <Paragraph animate style={{ margin: "0 0.5em 0.5em 0.5em" }}>
+      <Paragraph style={{ margin: "0 0.5em 0.5em 0.5em" }}>
         <span style={{ fontWeight: 600 }}>
           {showTooltip.starData.planets.length > 1 ? "Planeten:" : "Planet:"}
         </span>
