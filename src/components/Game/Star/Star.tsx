@@ -19,10 +19,12 @@ export default function Star(props: IStarComponent) {
     starData.x,
     starData.column
   );
-  const positionTop =
-    gridHeight * 0.05 +
-    ((gridHeight * 0.9 - diameter) / 100) * starData.y +
-    gridHeight * starData.row;
+  const positionTop = calculateStarPosition(
+    gridHeight,
+    diameter,
+    starData.y,
+    starData.row
+  );
 
   return (
     <>

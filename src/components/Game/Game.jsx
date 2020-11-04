@@ -86,7 +86,7 @@ export default function Game() {
           type: newType,
           name: starNames[index],
           planets: newPlanets,
-          sizeFactor: 16,
+          sizeFactor: 19,
           planetStartPosition: randomize(0, 360),
         };
         newStars.push(newStar);

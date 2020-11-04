@@ -9,10 +9,10 @@ export default function Planet(props: IPlanet) {
   const { screenHeight, starData, gridWidth, gridHeight, planetNumber } = props;
   const [degreesStep] = useState(randomize(70, 90));
 
-  const sizeFactor = 32;
+  const sizeFactor = 40;
   const diameter = screenHeight / sizeFactor;
   const starDiameter = screenHeight / starData.sizeFactor;
-  const orbitRadius = starDiameter * 1.2;
+  const orbitRadius = starDiameter * 1.025;
   const starPositionLeft = calculateStarPosition(
     gridWidth,
     starDiameter,

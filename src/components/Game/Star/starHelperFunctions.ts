@@ -5,8 +5,8 @@ export function calculateStarPosition(
   columnOrRow: number
 ): number {
   return (
-    gridDimension * 0.05 +
-    ((gridDimension * 0.9 - diameter) / 100) * coordinate +
+    gridDimension * 0.175 +
+    ((gridDimension * 0.65 - diameter) / 100) * coordinate +
     gridDimension * columnOrRow
   );
 }
