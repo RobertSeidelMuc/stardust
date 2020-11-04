@@ -32,12 +32,12 @@ export default function MainMenu() {
             </Button>
           </Link>
           <Link to="/load">
-            <Button Frame={ButtonFrame} animate className="button">
+            <Button Frame={ButtonFrame} animate className="button" disabled>
               Spiel laden
             </Button>
           </Link>
           <Link to="/credits">
-            <Button Frame={ButtonFrame} animate className="button">
+            <Button Frame={ButtonFrame} animate className="button" disabled>
               Credits
             </Button>
           </Link>
