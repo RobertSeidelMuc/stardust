@@ -1,7 +1,7 @@
 # Stardust
 A sci-fi themed game in progress, inspired by the German C64 game "Sterne wie Staub"
 
-## Stardust is not yet playable, but you can get a glimpse of what it might look like [here](https://stardust-42676.web.app/game)
+## Stardust is not yet playable, but you can get a glimpse of what it might look like [here](https://stardust-42676.web.app/)
 
 ## Stack
 
